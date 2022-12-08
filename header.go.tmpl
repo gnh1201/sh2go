@@ -12,7 +12,7 @@ import (
 func redir_append(s string, filename string) {
     f, _ := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
     defer f.Close()
-    f.WriteString(s)
+    f.WriteString("\n" + s)
 }
 
 func exec_shell(s string, dst string) string {
@@ -26,7 +26,7 @@ func exec_shell(s string, dst string) string {
     }
 
     if dst != "" {
-        redir_append(strings.TrimSuffix(out.String(), "\n"), dst)
+        redir_append(out.String(), dst)
     }
 
     return strings.TrimSuffix(out.String(), "\n")
