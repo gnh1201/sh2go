@@ -1,3 +1,5 @@
+// contact or report abuse: abuse@catswords.net
+
 const fs = require('fs')
 const sh = require('mvdan-sh')
 const syntax = sh.syntax
