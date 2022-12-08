@@ -1,0 +1,44 @@
+package main
+
+import (
+  "bytes"
+  "fmt"
+  //"log"
+  "os"
+  "os/exec"
+  "strings"
+)
+
+func redir_append(s string, filename string) {
+    f, _ := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+    defer f.Close()
+    f.WriteString(s)
+}
+
+func exec_shell(s string, dst string) string {
+    cmd := exec.Command("/bin/sh", "-c", s)
+    var out bytes.Buffer
+
+    cmd.Stdout = &out
+    err := cmd.Run()
+    if err != nil {
+        return ""
+    }
+
+    if dst != "" {
+        redir_append(strings.TrimSuffix(out.String(), "\n"), dst)
+    }
+
+    return strings.TrimSuffix(out.String(), "\n")
+}
+
+func get_user_home_directory() string {
+    dirname, err := os.UserHomeDir()
+    if err != nil {
+        return "."
+    }
+    return dirname
+}
+
+var HOME string = get_user_home_directory()
+
