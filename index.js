@@ -1,4 +1,6 @@
-// contact or report abuse: abuse@catswords.net
+// Namhyeon Go <abuse@catswords.net>
+// MIT License
+// Contact or report abuse: abuse@catswords.net
 
 const fs = require('fs')
 const sh = require('mvdan-sh')
